@@ -1,5 +1,9 @@
 <?php
 session_start();
+require("conexao.php");
+$id = $_GET["id"];
+$sql = mysqli_query($conexao, "SELECT * FROM `usuarios` WHERE `id_usuario`='$id'");
+$dados = mysqli_fetch_assoc($sql);
 ?>
 
 <!DOCTYPE html>
@@ -15,21 +19,21 @@ session_start();
 <body>
     <h1>Gerenciador de Tarefas</h1>
 
-    <form action="incluir_user.php" method="POST"> 
+    <form action="update_user.php?id=<?=$dados['id_usuario']?>" method="POST"> 
         <fieldset>
             <legend>Nova Usuário</legend>
 
             <label>
-                Nome: <input type="text" name="nome">
+                Nome: <input type="text" name="nome"  value="<?=$dados['nome'];?>">
             </label>
             <label>
-                Email: <input type="email" name="email">
+                Email: <input type="email" name="email" value="<?=$dados['email'];?>">
             </label>
             <label>
-                Endereço: <input type="text" name="endereco">
+                Endereço: <input type="text" name="endereco" value="<?=$dados['endereco'];?>">
             </label>
             <label>
-                Cidade: <input type="text" name="cidade">
+                Cidade: <input type="text" name="cidade" value="<?=$dados['cidade'];?>">
             </label>
             <label>
                 Estado:
@@ -40,7 +44,7 @@ session_start();
                 </select>
             </label>
             <label>
-                CEP: <input type="text" name="cep">
+                CEP: <input type="text" name="cep" value="<?=$dados['cep'];?>">
             </label>
             <input type="submit" value="Cadastrar" name="envia">
         </fieldset>

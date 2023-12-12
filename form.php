@@ -24,9 +24,9 @@ session_start();
                     <?php
                         require("conexao.php");
                         mysqli_select_db($conexao, $bd);
-                        $consulta = mysqli_query($conexao, "SELECT id_usuario FROM usuarios");
+                        $consulta = mysqli_query($conexao, "SELECT id_usuario, nome FROM usuarios");
                         while ($dados = mysqli_fetch_assoc($consulta)) {
-                            echo "<option value='" . $dados["id_usuario"] . "'>" . $dados["id_usuario"] . "</option>";
+                            echo "<option value='" . $dados["id_usuario"] . "'>" . $dados["nome"] . "</option>";
                         }
                     ?>
                 </select>
