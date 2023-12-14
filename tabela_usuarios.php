@@ -46,11 +46,19 @@
                 <td><?=$dados['estado'];?></td>
                 <td><?=$dados['cep'];?></td>
                 <td><a href="editar_usuario.php?id=<?=$dados['id_usuario']?>"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                <td><a href="#"><i class="fa-solid fa-trash"></i></a></td>
+                <td><a href="#" onclick="verifica('<?=$dados['id_usuario']?>')"><i class="fa-solid fa-trash"></i></a></td>
             </tr>
         </tbody>
         <?php } ?>
     </table>
+
+    <script>
+        function verifica(id){
+            if (confirm("Tem certeza que deseja excluir o usuário?")) {
+                window.location="excluir_user.php?id_usuario="+id;
+            }
+        }
+    </script>
 </body>
 
 </html>
