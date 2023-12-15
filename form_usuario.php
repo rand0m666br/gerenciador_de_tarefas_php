@@ -26,6 +26,9 @@ session_start();
                 Email: <input type="email" name="email">
             </label>
             <label>
+                Senha: <input type="password" name="senha">
+            </label>
+            <label>
                 Endereço: <input type="text" name="endereco">
             </label>
             <label>
