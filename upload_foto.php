@@ -14,7 +14,7 @@ if (isset($_FILES['arquivo'])) {
 	$newFilename = uniqid(); // aqui o nome do arquivo é alterado
 	$extensao = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
-	if ($extensao != "jpg" && $extensao != "png") {
+	if ($extensao != "jpg" && $extensao != "png" && $extensao != "jpeg") {
 		die("Formato inválido");
 	}
 	$deu_certo = move_uploaded_file($arquivo['tmp_name'], $pasta.$newFilename.".".$extensao);
@@ -35,9 +35,9 @@ if (isset($_FILES['arquivo'])) {
 		echo "Erro na inserção de dados no banco: " . mysqli_error($conexao);
 	}
 	mysqli_stmt_close($stmt);
-}else {
+}/*else {
 	echo "Falha ao enviar o arquivo";
-}
+}*/
 mysqli_close($conexao);
 ?>
 <!DOCTYPE html>
@@ -46,12 +46,13 @@ mysqli_close($conexao);
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Upload Imagem</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<form method="POST" enctype="multipart/form-data" action="">
 		<p>
 			<label>Selecione um arquivo</label>
-			<input type="file" name="foto">
+			<input type="file" name="arquivo">
 		</p>
 		<button name="upload" type="submit" value="escolha">Enviar arquivo</button>
 	</form>

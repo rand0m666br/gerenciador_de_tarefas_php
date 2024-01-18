@@ -12,7 +12,7 @@ $cep = $_POST["cep"];
 $query = mysqli_query($conexao, "UPDATE `usuarios` SET `nome`='$nome',`email`='$email',`endereco`='$endereco',`cidade`='$cidade',`estado`='$estado',`cep`='$cep' WHERE `id_usuario`='$id'");
 
 if ($query) {
-    header("location: tabela_usuarios.php?mensagem=atualizado com sucesso");
+    header("location: tabela_usuarios.php?mensagem=Atualizado com sucesso!");
 }else {
     echo "Erro";
 }

@@ -12,10 +12,12 @@
 <body>
     <h1>Listagem de Usuários</h1>
 
-    <?php
+    <div class="msg">    
+        <?php
         @$mensagem = $_GET["mensagem"];
         echo $mensagem;
-    ?>
+        ?>
+    </div>
     <table border="1">
         <thead>
             <tr>
