@@ -21,6 +21,7 @@
     <table border="1">
         <thead>
             <tr>
+                <th>Imagem</th>
                 <th>Id</th>
                 <th>Nome</th>
                 <th>Email</th>
@@ -40,6 +41,7 @@
         ?>
         <tbody>
             <tr>
+                <td><img src="<?=$dados['link']?>"></td>
                 <td><?=$dados['id_usuario'];?></td>
                 <td><?=$dados['nome'];?></td>
                 <td><?=$dados['email'];?></td>

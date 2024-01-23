@@ -1,11 +1,21 @@
 <?php
 
 
-function imagem()
-{
+// function imagem()
+// {
     if (isset($_FILES['arquivo'])) {
         include("conexao.php");
+
         $arquivo = $_FILES['arquivo'];
+        $nome = $_POST["nome"];
+        $email = $_POST["email"];
+        $senha = $_POST["senha"];
+        $hash = password_hash($senha, PASSWORD_ARGON2I);
+        $endereco = $_POST["endereco"];
+        $cidade = $_POST["cidade"];
+        $estado = $_POST["estado"];
+        $cep = $_POST["cep"];
+
         if ($arquivo['error']) {
             die("Falha ao enviar o arquivo");
         }
@@ -24,7 +34,7 @@ function imagem()
         if ($deu_certo) {
             echo "<p>Arquivo enviado com sucesso</p> <a target=\"_blank\" href=\"imagens/$newFilename.$extensao\">clique aqui</a></p>";
         }
-        $query = "INSERT INTO imagem (nome, link, data) VALUES (?, ?, NOW())";
+        $query = "INSERT INTO `usuarios`(`nome`, `email`, `senha`, `endereco`, `cidade`, `estado`, `cep`, foto, link) VALUES ('$nome','$email','$hash','$endereco','$cidade','$estado','$cep', ?, ?)";
         $stmt = mysqli_prepare($conexao, $query);
 
         $linkArquivo = "imagens/$newFilename.$extensao";
@@ -33,36 +43,36 @@ function imagem()
         mysqli_stmt_execute($stmt);
 
         if (mysqli_stmt_affected_rows($stmt) > 0) {
-            echo "Dados inseridos com sucesso";
+            header("location: form_usuario.php");
         } else {
             echo "Erro na inserção de dados no banco: " . mysqli_error($conexao);
         }
         mysqli_stmt_close($stmt);
     }
-}
+// }
 
-if (isset($_POST["envia"])) {
-    require("conexao.php");
+// if (isset($_POST["envia"])) {
+//     require("conexao.php");
 
-    
-    $nome = $_POST["nome"];
-    $email = $_POST["email"];
-    $senha = $_POST["senha"];
-    $hash = password_hash($senha, PASSWORD_ARGON2I);
-    $endereco = $_POST["endereco"];
-    $cidade = $_POST["cidade"];
-    $estado = $_POST["estado"];
-    $cep = $_POST["cep"];
-    
-    $sql = "INSERT INTO `usuarios`(`nome`, `email`, `senha`, `endereco`, `cidade`, `estado`, `cep`) VALUES ('$nome','$email','$hash','$endereco','$cidade','$estado','$cep')";
-    
-    $query = mysqli_query($conexao, $sql);
-    
-    imagem();
 
-    if (!$query) {
-        echo "Erro";
-    } else {
-        header("location: form_usuario.php");
-    }
-}
+//     $nome = $_POST["nome"];
+//     $email = $_POST["email"];
+//     $senha = $_POST["senha"];
+//     $hash = password_hash($senha, PASSWORD_ARGON2I);
+//     $endereco = $_POST["endereco"];
+//     $cidade = $_POST["cidade"];
+//     $estado = $_POST["estado"];
+//     $cep = $_POST["cep"];
+
+//     $sql = "INSERT INTO `usuarios`(`nome`, `email`, `senha`, `endereco`, `cidade`, `estado`, `cep`) VALUES ('$nome','$email','$hash','$endereco','$cidade','$estado','$cep')";
+
+//     $query = mysqli_query($conexao, $sql);
+
+//     imagem();
+
+//     if (!$query) {
+//         echo "Erro";
+//     } else {
+//         header("location: form_usuario.php");
+//     }
+// }

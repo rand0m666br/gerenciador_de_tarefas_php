@@ -59,6 +59,16 @@ td a:hover {
     border: 1px solid #555;
 }
 
+img {
+    width: 100px; 
+}
+
+img:hover {
+    transform: scale(1.8);
+    transition: .5s;
+    cursor: pointer;
+}
+
 /* .msg {
     background-color: rgb(41, 207, 0);
     text-align: center;
