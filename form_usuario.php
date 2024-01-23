@@ -15,7 +15,7 @@ session_start();
 <body>
     <h1>Gerenciador de Tarefas</h1>
 
-    <form action="incluir_user.php" method="POST"> 
+    <form action="incluir_user.php" method="POST" enctype="multipart/form-data"> 
         <fieldset>
             <legend>Nova Usuário</legend>
 
@@ -44,6 +44,9 @@ session_start();
             </label>
             <label>
                 CEP: <input type="text" name="cep">
+            </label>
+            <label>
+                Foto: <input type="file" name="arquivo">
             </label>
             <input type="submit" value="Cadastrar" name="envia">
         </fieldset>
