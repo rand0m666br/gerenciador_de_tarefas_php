@@ -11,6 +11,12 @@
 
 <body>
     <h1>Listagem de Usuários</h1>
+    <form action="" method="get">
+        <label for="search">Pesquisar:
+            <input type="text" name="search" id="search">
+            <button type="submit">Consultar</button>
+        </label>
+    </form>
 
     <div class="msg">    
         <?php
@@ -36,7 +42,22 @@
         session_start();
         require("conexao.php");
         // mysqli_select_db($conexao, $bd);
-        $consulta = mysqli_query($conexao, "SELECT * FROM `usuarios`");
+        if (isset($_GET["search"]) && !empty($_GET["search"])) {
+            $resultado = mysqli_real_escape_string($conexao, $_GET["search"]);
+            $query = "SELECT * FROM usuarios WHERE
+            nome LIKE '%$resultado%' OR
+            email LIKE '%$resultado%' OR
+            telefone LIKE '%$resultado%' OR
+            endereco LIKE '%$resultado%' OR
+            cidade LIKE '%$resultado%' OR
+            estado LIKE '%$resultado%' OR
+            cep LIKE '%$resultado%'";
+
+            $consulta = mysqli_query($conexao, $query);
+        }else {
+            // echo "realize uma pesquisa";
+            $consulta = mysqli_query($conexao, "SELECT * FROM `usuarios`");
+        }
         while ($dados = mysqli_fetch_assoc($consulta)) {
         ?>
         <tbody>
@@ -50,7 +71,7 @@
                 <td><?=$dados['estado'];?></td>
                 <td><?=$dados['cep'];?></td>
                 <td><a href="editar_usuario.php?id=<?=$dados['id_usuario']?>"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                <td><a href="#" onclick="verifica('<?=$dados['id_usuario']?>')"><i class="fa-solid fa-trash"></i></a></td>
+                <td><a href="excluir_user.php?id=<?=$dados['id_usuario']?>" onclick="verifica('<?=$dados['id_usuario']?>')"><i class="fa-solid fa-trash"></i></a></td>
             </tr>
         </tbody>
         <?php } ?>
